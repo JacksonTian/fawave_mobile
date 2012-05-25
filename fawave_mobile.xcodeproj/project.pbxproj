@@ -38,6 +38,7 @@
 		DE6A6319156FC03500B85336 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6A6318156FC03500B85336 /* MainViewController.m */; };
 		DE6A631B156FC03500B85336 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6A631A156FC03500B85336 /* MainViewController.xib */; };
 		DE6A631F156FC03500B85336 /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = DE6A631E156FC03500B85336 /* verify.sh */; };
+		DE6A632A156FC6C600B85336 /* www in Resources */ = {isa = PBXBuildFile; fileRef = DE6A6329156FC6C600B85336 /* www */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,10 +56,10 @@
 		DE6A62E1156FC03500B85336 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DE6A62E3156FC03500B85336 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DE6A62E5156FC03500B85336 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		DE6A62E9156FC03500B85336 /* fawave_mobile-Info.plist */ = {isa = PBXFileReference; path = "fawave_mobile-Info.plist"; sourceTree = "<group>"; };
+		DE6A62E9156FC03500B85336 /* fawave_mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fawave_mobile-Info.plist"; sourceTree = "<group>"; };
 		DE6A62EB156FC03500B85336 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DE6A62ED156FC03500B85336 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DE6A62EF156FC03500B85336 /* fawave_mobile-Prefix.pch */ = {isa = PBXFileReference; path = "fawave_mobile-Prefix.pch"; sourceTree = "<group>"; };
+		DE6A62EF156FC03500B85336 /* fawave_mobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fawave_mobile-Prefix.pch"; sourceTree = "<group>"; };
 		DE6A62F0156FC03500B85336 /* Cordova.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cordova.framework; path = /Users/Shared/Cordova/Frameworks/Cordova.framework; sourceTree = "<absolute>"; };
 		DE6A62F5156FC03500B85336 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DE6A62F9156FC03500B85336 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -71,13 +72,14 @@
 		DE6A630D156FC03500B85336 /* Default@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x~iphone.png"; path = "Resources/splash/Default@2x~iphone.png"; sourceTree = "<group>"; };
 		DE6A630F156FC03500B85336 /* Capture.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Capture.bundle; path = Resources/Capture.bundle; sourceTree = "<group>"; };
 		DE6A6311156FC03500B85336 /* Cordova.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cordova.plist; sourceTree = "<group>"; };
-		DE6A6314156FC03500B85336 /* AppDelegate.h */ = {isa = PBXFileReference; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		DE6A6314156FC03500B85336 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		DE6A6315156FC03500B85336 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		DE6A6317156FC03500B85336 /* MainViewController.h */ = {isa = PBXFileReference; name = MainViewController.h; path = Classes/MainViewController.h; sourceTree = "<group>"; };
+		DE6A6317156FC03500B85336 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Classes/MainViewController.h; sourceTree = "<group>"; };
 		DE6A6318156FC03500B85336 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
 		DE6A631A156FC03500B85336 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
-		DE6A631D156FC03500B85336 /* README */ = {isa = PBXFileReference; name = README; path = Plugins/README; sourceTree = "<group>"; };
+		DE6A631D156FC03500B85336 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		DE6A631E156FC03500B85336 /* verify.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = verify.sh; sourceTree = "<group>"; };
+		DE6A6329156FC6C600B85336 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		DE6A62BB156FC03500B85336 = {
 			isa = PBXGroup;
 			children = (
+				DE6A6329156FC6C600B85336 /* www */,
 				DE6A62E7156FC03500B85336 /* fawave_mobile */,
 				DE6A62CC156FC03500B85336 /* Frameworks */,
 				DE6A62CA156FC03500B85336 /* Products */,
@@ -329,6 +332,7 @@
 				DE6A6312156FC03500B85336 /* Cordova.plist in Resources */,
 				DE6A631B156FC03500B85336 /* MainViewController.xib in Resources */,
 				DE6A631F156FC03500B85336 /* verify.sh in Resources */,
+				DE6A632A156FC6C600B85336 /* www in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +546,7 @@
 				DE6A6324156FC03500B85336 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
