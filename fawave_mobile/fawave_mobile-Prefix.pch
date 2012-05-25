@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'fawave_mobile' target in the 'fawave_mobile' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
