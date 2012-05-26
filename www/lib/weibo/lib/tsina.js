@@ -1156,13 +1156,16 @@ var TSinaAPI = {
   SEARCH_TPL: '<a target="_blank" href="{{search_url}}{{search}}" title="Search #{{search}}">#{{search}}#</a>',
   
   process_search: function (str) {
-    return str.replace(this.SEARCH_MATCH_RE, this._process_search_callback);
+    var that = this;
+    return str.replace(this.SEARCH_MATCH_RE, function (m, g1) {
+      return that._process_search_callback(m, g1);
+    });
   },
 
   _process_search_callback: function (m, g1) {
     // 修复#xxx@xxx#嵌套问题
-    var search = g1.remove_html_tag();
-    return this.SEARCH_TPL.format({ search: search, search_url: this.config.search_url });
+    // var search = g1.remove_html_tag();
+    return this.SEARCH_TPL.format({ search: g1, search_url: this.config.search_url });
   },
 
   format_search_text: function (str) { // 格式化主题

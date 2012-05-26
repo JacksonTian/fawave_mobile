@@ -1,3 +1,61 @@
 #publish {
   
 }
+#publish header a.back {
+    left: 5px;
+    text-align: center;
+    line-height: 30px;
+    background-image: url(../images/back.png);
+}
+#publish header a.send {
+    right: 5px;
+    line-height: 30px;
+    text-align: center;
+    background-image: url(../images/send.png);
+}
+#publish header a.action{
+    position: absolute;
+    height: 30px;
+    width: 60px;
+    color: #fff;
+    background-size: 60px 30px;
+    top: 15px;
+}
+#publish header .pre,
+#publish header .next {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    background-size: 20px 20px;
+}
+#publish header .pre {
+    left: 65px;
+    background-image: url(../images/pre.png);
+}
+#publish header .next {
+    right: 70px;
+    background-image: url(../images/next.png);
+}
+
+#publish header .accounts {
+    -webkit-box-flex: 1;
+    position: absolute;
+    left: 85px;
+    right: 85px;
+    height: 30px;
+    top: 15px;
+}
+#publish article {
+    position: absolute;
+    background-color: #a4bbd9;
+    top: 60px;
+    width: 100%;
+    bottom: 0;
+}
+#publish article textarea {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    padding: 10px;
+    height: 40%;
+}

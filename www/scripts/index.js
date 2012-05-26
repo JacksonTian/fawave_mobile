@@ -72,8 +72,8 @@ V5.registerCard("index", function () {
     var currentUser = {
       blogType: 'tsina',
       authtype: 'oauth',
-      oauth_token_key: '10860b4bd170b003381ea6d953f3aba6',
-      oauth_token_secret: 'c0af7008eba4d9de8e14a4c61e45b318' 
+      oauth_token_key: 'd1ef5fa9aa9fee08fdc6267193a59d6a',
+      oauth_token_secret: '798722589f339cc4e9e0a66a9b53f693' 
     };
     if (!navigator.notification) {
       currentUser.proxy = location.origin + '/proxy';

@@ -1,4 +1,24 @@
 <section id="publish" class="card">
-  <div><textarea></textarea></div>
-  <button>发微！</button>
+  <header id="header">
+    <a class="action back" href="javascript:;">返回</a>
+    <div class="pre"></div>
+    <div class="accounts">
+      <ul>
+        <li><a href="javascript:;">新浪</a></li>
+        <li><a href="javascript:;">腾讯</a></li>
+      </ul>
+    </div>
+    <div class="next"></div>
+    <a class="action send" href="javascript:;">发微!</a>
+  </header>
+  <article>
+    <textarea placeholder="少年来发微！"></textarea>
+    <ul>
+      <li><a class="position" href="javascript:;"></a></li>
+      <li><a class="photo" href="javascript:;"></a></li>
+      <li><a class="topic" href="javascript:;"></a></li>
+      <li><a class="metion" href="javascript:;"></a></li>
+      <li><a class="toggle_keyboard" href="javascript:;"></a></li>
+    </ul>
+  </article>
 </section>

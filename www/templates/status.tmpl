@@ -13,32 +13,37 @@
       <img src="<%= status.thumbnail_pic %>" data-bmiddle="<%= status.bmiddle_pic %>" 
         data-original="<%= status.original_pic %>" />
       <% } %>
-      <div class="source">通过 <%= status.source %></div>
       <div class="comment_count">转发(<span>0</span>)</div>
       <div class="repost_count">评论(<span>0</span>)</div>
-    </div>
-
-    <% if (status.retweeted_status) { 
-      var retweeted_status = status.retweeted_status;
-    %>
-    <div class="retweeted_status">
-      <div class="avatar">
-        <a href="<%= retweeted_status.user.t_url %>"><img src="<%= retweeted_status.user.profile_image_url %>" /></a>
-      </div>
-      <div class="status">
-        <div class="title">
-          <div class="username"><%= retweeted_status.user.screen_name %></div>
-          <div class="time"><%= new Date(retweeted_status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
+      <div class="source">通过 <%= status.source %></div>
+      <% if (status.retweeted_status) { 
+        var retweeted_status = status.retweeted_status;
+      %>
+      <div class="retweeted_status">
+        <i></i>
+        <div class="retweeted">
+          <div class="avatar">
+            <a href="<%= retweeted_status.user.t_url %>"><img src="<%= retweeted_status.user.profile_image_url %>" /></a>
+          </div>
+          <div class="status">
+            <div class="title">
+              <div class="username"><%= retweeted_status.user.screen_name %></div>
+              <div class="time"><%= new Date(retweeted_status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
+            </div>
+            <%= retweeted_status.text %>
+            <div class="source">通过 <%= retweeted_status.source %></div>
+          </div>
         </div>
         <%= api.process_text(retweeted_status.text) %>
         <% if (retweeted_status.thumbnail_pic) { %>
         <img src="<%= retweeted_status.thumbnail_pic %>" data-bmiddle="<%= retweeted_status.bmiddle_pic %>" 
           data-original="<%= retweeted_status.original_pic %>" />
         <% } %>
+        <div class="comment_count">转发(<span>0</span>)</div>
+        <div class="repost_count">评论(<span>0</span>)</div>
         <div class="source">通过 <%= retweeted_status.source %></div>
       </div>
+      <% } %>
     </div>
-    <% } %>
-
   </li>
 <%});%>
