@@ -1,0 +1,26 @@
+{
+  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "contributors": [
+    "JacksonTian <shyvo1987@gmail.com> (https://github.com/JacksonTian)"
+  ],
+  "name": "fawave_mobile",
+  "description": "FaWave mobile version.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/JacksonTian/fawave_mobile",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JacksonTian/fawave_mobile.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "weibo": ">=0.4.1"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">=0.6.17"
+  }
+}

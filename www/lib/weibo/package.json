@@ -1,0 +1,58 @@
+{
+  "name": "weibo",
+  "version": "0.4.1",
+  "description": "Weibo SDK, base on node. Now support weibo, tqq, tsohu, twitter.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fengmk2/node-weibo.git"
+  },
+  "author": {
+    "name": "fengmk2",
+    "email": "fengmk2@gmail.com",
+    "url": "http://fengmk2.cnblogs.com"
+  },
+  "main": "index",
+  "contributors": [
+    {
+      "name": "fengmk2",
+      "email": "fengmk2@gmail.com"
+    },
+    {
+      "name": "hpf1908",
+      "email": "hpf1908@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "should": ">=0.4.2",
+    "mocha": ">=0.14.1"
+  },
+  "dependencies": {
+    "urllib": ">=0.2.5"
+  },
+  "keywords": [
+    "framework",
+    "sinatra",
+    "web",
+    "rest",
+    "restful",
+    "weibo",
+    "sdk"
+  ],
+  "engines": {
+    "node": ">= 0.4.1"
+  },
+  "_npmUser": {
+    "name": "fengmk2",
+    "email": "fengmk2@gmail.com"
+  },
+  "_id": "weibo@0.4.1",
+  "optionalDependencies": {},
+  "_engineSupported": true,
+  "_npmVersion": "1.1.21",
+  "_nodeVersion": "v0.6.17",
+  "_defaultsLoaded": true,
+  "_from": "weibo@>=0.4.1"
+}

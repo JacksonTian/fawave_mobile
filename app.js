@@ -1,17 +1,28 @@
 var http = require('http');
 var path = require('path');
-var url = require('url');
+var urlparse = require('url').parse;
 var connect = require('connect');
 
 var app = connect();
-app.use(connect.query());
 app.use("/proxy", function (req, res) {
-  var target = url.parse(req.query.url);
+  var url = urlparse(req.url, true).query.url;
+  if (!url) {
+    return res.end(req.method + ': ' + req.url);
+  }
+  var target = urlparse(url);
+  var headers = {};
+  for (var k in req.headers) {
+    if (k === 'host' || k === 'connection') {
+      continue;
+    }
+    headers[k] = req.headers[k];
+  }
   var options = {
     host: target.hostname,
     port: target.port || 80,
     path: target.path,
-    method: req.method
+    method: req.method,
+    headers: headers
   };
 
   var proxyReq = http.request(options, function (response) {
@@ -31,17 +42,15 @@ app.use("/proxy", function (req, res) {
   });
 
   req.on('data', function (chunk) {
-    console.log('data', chunk.toString());
+    // console.log('data', chunk.toString());
     proxyReq.write(chunk);
   });
   req.on('end', function () {
-    console.log('end');
     proxyReq.end();
   });
-
 });
 
-app.use(connect.static(path.join(__dirname, "www")));
+app.use(connect.static(path.join(__dirname, "www"), { maxAge: 0 }));
 
 
 app.listen(8001);

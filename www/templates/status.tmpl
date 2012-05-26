@@ -1,17 +1,36 @@
 <ul>
 <% _.each(statuses, function (status, index) {%>
-    <li>
-        <div class="avatar">
-            <a href="http://weibo.com/<%=status.user.domain%>"><img src="<%=status.user.profile_image_url%>" /></a>
+  <li>
+    <div class="avatar">
+      <a href="<%= status.user.t_url %>"><img src="<%= status.user.profile_image_url %>" /></a>
+    </div>
+    <div class="status">
+      <div class="title">
+        <div class="username"><%= status.user.screen_name %></div>
+        <div class="time"><%= new Date(status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
+      </div>
+      <%= status.text %>
+      <div class="source">通过 <%= status.source %></div>
+    </div>
+
+    <% if (status.retweeted_status) { 
+      var retweeted_status = status.retweeted_status;
+    %>
+    <div class="retweeted_status">
+      <div class="avatar">
+        <a href="<%= retweeted_status.user.t_url %>"><img src="<%= retweeted_status.user.profile_image_url %>" /></a>
+      </div>
+      <div class="status">
+        <div class="title">
+          <div class="username"><%= retweeted_status.user.screen_name %></div>
+          <div class="time"><%= new Date(retweeted_status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
         </div>
-        <div class="status">
-            <div class="title">
-                <div class="username"><%=status.user.screen_name%></div>
-                <div class="time"><%=V5.format(new Date(status.created_at))%></div>
-            </div>
-            <%=status.text%>
-            <div class="source">来自<%=status.source%></div>
-        </div>
-    </li>
+        <%= retweeted_status.text %>
+        <div class="source">通过 <%= retweeted_status.source %></div>
+      </div>
+    </div>
+    <% } %>
+
+  </li>
 <%});%>
 </ul>
