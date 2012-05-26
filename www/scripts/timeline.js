@@ -13,9 +13,17 @@ V5.registerCard("timeline", function () {
       });
     });
 
-    $.getJSON(V5.proxy("http://api.t.sina.com.cn/statuses/public_timeline.json?source=117815021"), function (json) {
-      proxy.fire("data", {statuses: json});
+    var user = {
+      blogType: 'tsina'
+    };
+    if (!navigator.notification) {
+      user.proxy = location.host + '/proxy';
+    }
+    console.log(user);
+    weibo.TAPI.public_timeline({ user: user }, function (err, statuses) {
+      proxy.fire("data", { statuses: statuses });
     });
+
     V5.getTemplate("status", function (template) {
       proxy.fire("template", template);
     });

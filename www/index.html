@@ -8,9 +8,16 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="apple-touch-icon" href="assets/images/icon.png" />
-	  <script type="text/javascript" charset="utf-8" src="lib/cordova-1.7.0.js"></script>
-    <script type="text/javascript">
-    </script>
+	  <script src="lib/cordova-1.7.0.js"></script>
+
+    <script src="lib/weibo/lib/base64.js"></script>
+    <script src="lib/weibo/lib/sha1.js"></script>
+    <script src="lib/weibo/lib/utils.js"></script>
+    <script src="lib/weibo/lib/oauth.js"></script>
+    <script src="lib/weibo/lib/urllib.js"></script>
+    <script src="lib/weibo/lib/tsina.js"></script>
+    <script src="lib/weibo/lib/tapi.js"></script>
+
     <script src="lib/LAB.src.js"></script>
     <script>
       $LAB.script("lib/storage.js")
@@ -25,7 +32,28 @@
       .script("scripts/setting.js")
       .script("scripts/timeline.js")
       .wait(function () {
+        
+        // load all the lib scripts with urlprefix where the `weibo` directory you put into 
+        var tapi = weibo.TAPI;
+        var appkey = '4010445928', secret = 'd119f62bfb70a4ba8d9b68bf14d6e45a';
+        var oauth_callback_url = 'oob';
+        tapi.init('tsina', appkey, secret, oauth_callback_url);
+        
+        // var user = {
+        //   blogType: 'tsina',
+        //   proxy: 'http://localhost:8001/proxy'
+        // };
+        // tapi.public_timeline({ user: user }, function (error, data, xhr) {
+        //   console.log(arguments)
+        //   if (error) {
+        //     alert(JSON.stringify(error));
+        //   } else {
+        //     alert(JSON.stringify(data));
+        //   }
+        // });
+
         V5.init();
+        
       });
     </script>
     <link rel="stylesheet" href="css/base.css" />
