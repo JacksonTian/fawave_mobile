@@ -1,5 +1,5 @@
 <% _.each(statuses, function (status, index) {%>
-  <li>
+  <li data-id="<%= status.id %>">
     <div class="avatar">
       <a href="<%= status.user.t_url %>"><img src="<%= status.user.profile_image_url %>" /></a>
     </div>
@@ -8,8 +8,10 @@
         <div class="username"><%= status.user.screen_name %></div>
         <div class="time"><%= new Date(status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
       </div>
-      <%= status.text %>
+      <%= api.process_text(status.text) %>
       <div class="source">通过 <%= status.source %></div>
+      <div class="comment_count">转发(<span>0</span>)</div>
+      <div class="repost_count">评论(<span>0</span>)</div>
     </div>
 
     <% if (status.retweeted_status) { 
@@ -24,7 +26,7 @@
           <div class="username"><%= retweeted_status.user.screen_name %></div>
           <div class="time"><%= new Date(retweeted_status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
         </div>
-        <%= retweeted_status.text %>
+        <%= api.process_text(retweeted_status.text) %>
         <div class="source">通过 <%= retweeted_status.source %></div>
       </div>
     </div>

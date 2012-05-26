@@ -1,12 +1,14 @@
 (function () {
 
 var TAPI = {};
-
+var utils;
 var root = this; // window on browser
 if (typeof module === 'undefined') {
   root.weibo.TAPI = TAPI;
+  utils = root.weibo.utils;
 } else {
   module.exports = TAPI;
+  utils = require('./utils');
 }
 
 var TSinaAPI;
@@ -27,7 +29,7 @@ if (typeof require !== 'undefined') {
 }
 
 // 封装兼容所有微博的api，自动判断微博类型
-Object.extend(TAPI, {
+utils.extend(TAPI, {
   
   TYPES: {
     tsina: TSinaAPI,
@@ -122,8 +124,24 @@ Object.extend(TAPI, {
 
   // since_id, max_id, count, page 
   // home_timeline in twitter
-  friends_timeline: function(data, callback, context) {
-    return this.api_dispatch(data).friends_timeline(data, callback, context);
+  friends_timeline: function (data, callback, context) {
+    var max_id = data.max_id;
+    return this.api_dispatch(data).friends_timeline(data, function (err, statuses) {
+      if (err || !max_id) {
+        return callback.call(context, err, statuses);
+      }
+      max_id = String(max_id);
+      // ignore the max_id status
+      var needs = [];
+      for (var i = 0, l = statuses.length; i < l; i++) {
+        var status = statuses[i];
+        if (String(status.id) === max_id) {
+          continue;
+        }
+        needs.push(status);
+      }
+      callback.call(context, null, needs);
+    }, this);
   },
   
   /* 

@@ -34,23 +34,10 @@
       .wait(function () {
         
         // load all the lib scripts with urlprefix where the `weibo` directory you put into 
-        var tapi = weibo.TAPI;
+        window.tapi = weibo.TAPI;
         var appkey = '4010445928', secret = 'd119f62bfb70a4ba8d9b68bf14d6e45a';
         var oauth_callback_url = 'oob';
         tapi.init('tsina', appkey, secret, oauth_callback_url);
-        
-        // var user = {
-        //   blogType: 'tsina',
-        //   proxy: 'http://localhost:8001/proxy'
-        // };
-        // tapi.public_timeline({ user: user }, function (error, data, xhr) {
-        //   console.log(arguments)
-        //   if (error) {
-        //     alert(JSON.stringify(error));
-        //   } else {
-        //     alert(JSON.stringify(data));
-        //   }
-        // });
 
         V5.init();
         

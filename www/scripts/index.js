@@ -24,8 +24,7 @@ V5.registerCard("index", function () {
     var pullUpEl = view.$('.pullUp');
     var pullUpOffset = pullUpEl.height();
     view.iScroll = new iScroll(view.$("article")[0], {
-        onBeforeScrollStart : function (e) {
-      },
+      onBeforeScrollStart: function (e) {},
       useTransition: true,
       topOffset: pullDownOffset,
       onRefresh: function () {
@@ -58,40 +57,91 @@ V5.registerCard("index", function () {
       },
       onScrollEnd: function () {
         if (pullDownEl.hasClass('flip')) {
+          // get new datas
           pullDownEl.addClass('loading');
           pullDownEl.find('.pullDownLabel').html('Loading...');
           getTimeline(); // Execute custom function (ajax call?)
         } else if (pullUpEl.hasClass('flip')) {
           pullUpEl.addClass('loading');
           pullUpEl.find('.pullUpLabel').html('Loading...');
-          getTimeline(); // Execute custom function (ajax call?)
+          nextPage(); // Execute custom function (ajax call?)
         }
       }
     });
+
+    var currentUser = {
+      blogType: 'tsina',
+      authtype: 'oauth',
+      oauth_token_key: '10860b4bd170b003381ea6d953f3aba6',
+      oauth_token_secret: 'c0af7008eba4d9de8e14a4c61e45b318' 
+    };
+    if (!navigator.notification) {
+      currentUser.proxy = location.origin + '/proxy';
+    }
+
     proxy.assignAlways("template", "data", function (template, data) {
-      view.$(".statuses ul").html(_.template(template, data));
+      var api = tapi.api_dispatch(currentUser);
+      data.api = api;
+      if (data.append) {
+        view.$(".statuses ul").append(_.template(template, data));
+      } else {
+        view.$(".statuses ul").html(_.template(template, data));
+      }
       view.iScroll.refresh();
     });
 
-    var getTimeline = function () {
-      var user = {
-        blogType: 'tsina',
-        authtype: 'oauth',
-        oauth_token_key: '10860b4bd170b003381ea6d953f3aba6',
-        oauth_token_secret: 'c0af7008eba4d9de8e14a4c61e45b318' 
-      };
-      if (!navigator.notification) {
-        user.proxy = location.origin + '/proxy';
+    proxy.assignAlways('counts', function (counts) {
+      counts = counts || [];
+      for (var i = 0, l = counts.length; i < l; i++) {
+        var count = counts[i];
+        var $status = view.$('.statuses li[data-id="' + count.id + '"]');
+        $status.find('.comment_count span').html(count.comments);
+        $status.find('.repost_count span').html(count.rt);
       }
-      weibo.TAPI.friends_timeline({ user: user }, function (error, statuses) {
+    });
+
+    var getTimeline = function () {
+      tapi.friends_timeline({ user: currentUser }, function (err, statuses) {
         proxy.fire("data", { statuses: statuses });
+        showCounts(statuses);
       });
-      
     };
+
+    var nextPage = function () {
+      var max_id = view.$('.statuses li:last-child').data('id');
+      tapi.friends_timeline({
+        user: currentUser,
+        max_id: max_id
+      }, function (err, statuses) {
+        proxy.fire('data',  { statuses: statuses, append: true });
+        showCounts(statuses);
+      });
+    };
+
+    var showCounts = function (statuses) {
+      if (!statuses || statuses.length === 0) {
+        return;
+      }
+      var ids = {};
+      for (var i = 0, l = statuses.length; i < l; i++) {
+        var status = statuses[i];
+        ids[status.id] = 1;
+        if (status.retweeted_status) {
+          ids[status.retweeted_status.id] = 1;
+        }
+      }
+      ids = Object.keys(ids);
+      tapi.counts({ user: currentUser, ids: ids.join(',') }, function (err, counts) {
+        proxy.fire('counts', counts);
+      });
+    };
+
     V5.getTemplate("status", function (template) {
       proxy.fire("template", template);
     });
+
     getTimeline();
+
     view.bind("goPublish", function (event) {
       card.openCard("publish");
     });
@@ -101,8 +151,8 @@ V5.registerCard("index", function () {
     });
 
     view.delegateEvents({
-        "click .write": "goPublish",
-        "click .refresh": "refresh"
+      "click .write": "goPublish",
+      "click .refresh": "refresh"
     });
 
   };
