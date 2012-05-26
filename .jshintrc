@@ -13,7 +13,13 @@
     "should",
     "jQuery",
     "navigator",
-    "location"
+    "location",
+    "weibo",
+    "V5",
+    "_",
+    "iScroll",
+    "EventProxy",
+    "tapi"
   ],
 
   "node" : true,
