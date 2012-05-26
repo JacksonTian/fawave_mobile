@@ -22,8 +22,9 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
-		<string>www.baidu.com</string>
-		<string>m.baidu.com</string>
+		<string>api.t.sina.com.cn</string>
+		<string>*.sinaimg.cn</string>
+		<string>weibo.com</string>
 	</array>
 	<key>Plugins</key>
 	<dict>

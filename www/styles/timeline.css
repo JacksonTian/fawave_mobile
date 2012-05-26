@@ -1,3 +1,127 @@
-#timeline {
-  
+#timeline header {
+    height: 44px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    border-bottom: 1px solid #777f90;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #f4f5f7),
+        color-stop(0.5, #d8dbe2),
+        color-stop(0.5, #cdd2dc),
+        color-stop(1, #bec5d5));
+    padding: 0 5px;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+#timeline header a {
+    text-decoration: none;
+}
+#timeline header a.action{
+    width: 34px;
+    height: 30px;
+    display: -webkit-box;
+}
+#timeline header a.write {
+    background-image: url(../images/write.png);
+}
+#timeline header a.refresh {
+    background-image: url(../images/refresh.png);
+}
+#timeline header h2 {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+#timeline header h2 a {
+    color: #333333;
+}
+#timeline article {
+    position: absolute;
+    background-color: #f4f4f4;
+    top: 45px;
+    width: 100%;
+    bottom: 50px;
+}
+#timeline footer {
+    height: 49px;
+    border-top: 1px solid #1c1c1c;
+    -webkit-box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #575757),
+        color-stop(0.5, #141414),
+        color-stop(0.5, #000),
+        color-stop(1, #000));   
+}
+#timeline footer ul {
+    display: -webkit-box;
+}
+#timeline footer li {
+    -webkit-box-flex: 1;
+    width: 60px;
+}
+#timeline footer a {
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    height: 100%;
+    color: #999;
+    font-size: 12px;
+}
+#timeline footer .icon {
+    height: 30px;
+    width: 30px;
+    display: block;
+    background-position: center center;
+}
+#timeline footer .home .icon {
+    background-image: url(../images/bar_home.png);
+}
+#timeline footer .message .icon {
+    background-image: url(../images/bar_commentbox.png);
+}
+#timeline footer .profile .icon {
+    background-image: url(../images/bar_profile.png);
+} 
+#timeline footer .square .icon {
+    background-image: url(../images/bar_search.png);
+} 
+#timeline footer .more .icon {
+    background-image: url(../images/bar_msg_more.png);
+}
+#timeline .statuses li {
+    display: -webkit-box;
+    padding: 7px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+#timeline .statuses .avatar {
+    width: 55px;
+    padding: 0 0 0 8px;
+    -webkit-box-sizing: border-box;
+}
+#timeline .statuses .avatar img {
+    width: 35px;
+    height: 35px;
+    -webkit-mask-box-image: url(../images/avatar_image_mask.png) 75 stretch;
+}
+#timeline .statuses .status {
+    -webkit-box-flex: 1;
+    font-size: 13px;
+    padding: 0 16px 0 0;
+}
+#timeline .statuses .username {
+    font-size: 12px;
+    padding: 0 0 8px 0;
+    font-weight: bold;
+}
+#timeline .statuses .title {
+    display: -webkit-box;
 }

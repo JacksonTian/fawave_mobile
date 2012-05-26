@@ -26,6 +26,7 @@ app.use("/proxy", function (req, res) {
 
   proxyReq.on('error', function (err) {
     proxyReq.abort();
+    res.writeHead(500);
     res.end(req.query.url + ' error: ' + err.message);
   });
 

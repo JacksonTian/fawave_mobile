@@ -1,0 +1,17 @@
+<ul>
+<% _.each(statuses, function (status, index) {%>
+    <li>
+        <div class="avatar">
+            <a href="http://weibo.com/<%=status.user.domain%>"><img src="<%=status.user.profile_image_url%>" /></a>
+        </div>
+        <div class="status">
+            <div class="title">
+                <div class="username"><%=status.user.screen_name%></div>
+                <!--<div class="time"><%=status.created_at%></div>-->
+            </div>
+            <%=status.text%>
+            <div></div>
+        </div>
+    </li>
+<%});%>
+</ul>
