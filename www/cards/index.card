@@ -13,6 +13,16 @@
   </header>
   <article>
     <div class="statuses">
+      <div class="pullDown">
+        <span class="pullDownIcon"></span>
+        <span class="pullDownLabel">Pull down to refresh...</span>
+      </div>
+      <ul>
+      </ul>
+      <div class="pullUp">
+        <span class="pullUpIcon"></span>
+        <span class="pullUpLabel">Pull up to refresh...</span>
+      </div>
     </div>
   </article>
   <footer>

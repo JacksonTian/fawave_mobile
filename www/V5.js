@@ -608,8 +608,6 @@
         return "proxy?url=" + url;
     };
     V5.format = function (day) {
-        console.log(typeof day);
-        console.log(day);
         return day.getFullYear() + "/" + (day.getMonth() + 1) + "/" + day.getDate() + " " + day.getHours() + "/" + day.getMinutes() + "/" + day.getSeconds();
     };
 }(window));
