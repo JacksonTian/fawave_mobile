@@ -1,5 +1,7 @@
 <section id="index" class="card">
 <!-- Your HTML code here -->
-    <span>Hello V5 Framework.</span>
+  <span>Hello V5 Framework.</span>
+  <div class="area">
+    Cross domain.
+  </div>
 </section>
-

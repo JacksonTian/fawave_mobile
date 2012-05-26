@@ -166,7 +166,7 @@
     };
 
     /**
-     * @description Gets Card from cache or server. If the card file comes from server, 
+     * @description Gets Card from cache or server. If the card file comes from server,
      * the callback will be executed async, and cache it.
      * @param {string} cardName Card name.
      * @param {boolean} enableL10N Flag whether this card's localization enabled.
@@ -241,7 +241,7 @@
             }
 
             var loadingNode = column.find(".column_loading").removeClass("hidden");
-            var card = V5._cards[hash];
+            card = V5._cards[hash];
             V5.getCard(hash, card.enableL10N, function (node) {
                 loadingNode.addClass("hidden");
                 if (viewport === V5.viewport) {
@@ -597,4 +597,14 @@
 (function (global) {
     var V5 = global.V5;
     V5.Model = {};
+}(window));
+
+(function (root) {
+    var V5 = root.V5;
+    V5.proxy = function (url) {
+        if (navigator.notification) {
+            return url;
+        }
+        return "proxy?url=" + url;
+    };
 }(window));

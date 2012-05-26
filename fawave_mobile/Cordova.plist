@@ -22,7 +22,7 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
-		<string>*</string>
+		<string>www.baidu.com</string>
 	</array>
 	<key>Plugins</key>
 	<dict>

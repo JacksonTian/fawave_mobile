@@ -4,8 +4,8 @@ V5.registerCard("index", function () {
     var view = V5.View(card.node);
 
     // Write down your initialize code at here.
-    $.get("http://www.baidu.com/", function (data) {
-      view.html(data);
+    $.get(V5.proxy("http://www.baidu.com/"), function (data) {
+      view.$(".area").html(data);
     });
   };
 
