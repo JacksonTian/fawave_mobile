@@ -150,9 +150,22 @@ V5.registerCard("index", function () {
       getTimeline();
     });
 
+    view.bind("zoomin", function (event) {
+      var img = $(event.currentTarget);
+      if (img.data("state") === "thumbnail") {
+        img.attr("src", img.data("bmiddle"));
+        img.data("state", "bmiddle");
+      } else {
+        img.attr("src", img.data("thumbnail"));
+        img.data("state", "thumbnail");
+      }
+      view.iScroll.refresh();
+    });
+
     view.delegateEvents({
       "click .write": "goPublish",
-      "click .refresh": "refresh"
+      "click .refresh": "refresh",
+      "click .status img": "zoomin"
     });
 
   };

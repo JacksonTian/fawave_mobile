@@ -168,6 +168,13 @@
 #index .statuses .title {
     display: -webkit-box;
 }
+#index .statuses .info {
+  display: -webkit-box;
+  padding: 5px 0px;
+}
+#index .statuses .source {
+  -webkit-box-flex: 1;
+}
 
 #index .pullDown,
 #index .pullUp {
@@ -233,7 +240,7 @@
     width: 30px;
     height: 30px;
     padding: 0 0 0 0;
-    margin: 0 5px 0 0;
+    margin: 0 10px 0 0;
     -webkit-box-sizing: border-box;
     float: left;
 }
@@ -243,6 +250,17 @@
 }
 #index .statuses .retweeted_status .status {
   padding: 0 0 0 5px;
+}
+#index .status img {
+  border: 1px solid #d8d8d8;
+  padding: 2px;
+  background-color: #fff;
+}
+#index .status img[data-state="thumbnail"] {
+  cursor: -webkit-zoom-in;
+}
+#index .status img[data-state="bmiddle"] {
+  cursor: -webkit-zoom-out;
 }
 #index .status i {
   background-size: 13px 8px;
