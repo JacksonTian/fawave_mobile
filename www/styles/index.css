@@ -1,4 +1,4 @@
-#index header {
+#header {
     height: 60px;
     position: absolute;
     top: 0;
@@ -15,7 +15,7 @@
     -webkit-box-pack: center;
     -webkit-box-align: center;
 }
-#index header a {
+#header a {
     text-decoration: none;
 }
 #index header a.action{
@@ -58,7 +58,7 @@
     height: 30px;
     top: 15px;
 }
-#index header .accounts ul {
+#header .accounts ul {
   display: -webkit-box;
   list-style: none;
   float: left;
@@ -68,29 +68,27 @@
   margin: 0;
   text-align: left;
 }
-#index header .accounts li {
+#header .accounts li {
     width: 30px;
     height: 30px;
     margin: 0 0 0 5px;
     background-image: url(../images/account.png);
     background-size: 30px 30px;
 }
-#index header .accounts a {
+#header .accounts a {
     color: #333333;
 }
 #index article {
     position: absolute;
-    background-color: #f4f4f4;
+    background-color: #fff;
     top: 60px;
     width: 100%;
     bottom: 50px;
 }
-#index article .title {
-    display: -webkit-box;
-}
 #index article .username {
     -webkit-box-flex: 1;
 }
+
 #index footer {
     height: 49px;
     border-top: 1px solid #1c1c1c;
@@ -164,7 +162,7 @@
 }
 #index .statuses .username {
     font-size: 13px;
-    padding: 0 0 8px 0;
+    padding: 0 0 5px 0;
     font-weight: bold;
 }
 #index .statuses .title {
@@ -184,10 +182,10 @@
 }
 #index .pullDown .pullDownIcon,
 #index .pullUp .pullUpIcon  {
-  display:block;
-  float:left;
-  width:40px;
-  height:40px;
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
   background-image: url(../images/pull-icon@2x.png);
   background-size: 40px 80px;
   -webkit-transition-property: -webkit-transform;
@@ -199,11 +197,9 @@
 #index .pullUp .pullUpIcon  {
   -webkit-transform: rotate(-180deg) translateZ(0);
 }
-
 #index .pullDown.flip .pullDownIcon {
   -webkit-transform: rotate(-180deg) translateZ(0);
 }
-
 #index .pullUp.flip .pullUpIcon {
   -webkit-transform: rotate(0deg) translateZ(0);
 }
@@ -223,4 +219,48 @@
 @-webkit-keyframes loading {
   from { -webkit-transform:rotate(0deg) translateZ(0); }
   to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+
+#index .retweeted_status {
+  clear: both;
+  border: 1px solid #dfe4eb;
+  background-color: #f0f2f8; 
+  border-radius: 8px;
+  padding: 4px 4px;
+  margin-top: 15px;
+}
+#index .statuses .retweeted_status .avatar {
+    width: 30px;
+    height: 30px;
+    padding: 0 0 0 0;
+    margin: 0 5px 0 0;
+    -webkit-box-sizing: border-box;
+    float: left;
+}
+#index .statuses .retweeted_status .avatar img {
+  width: 30px;
+  height: 30px;
+}
+#index .statuses .retweeted_status .status {
+  padding: 0 0 0 5px;
+}
+#index .status i {
+  background-size: 13px 8px;
+  width: 13px;
+  height: 8px;
+  overflow: hidden;
+  display: block;
+  margin-left: 20px;
+  margin-top: -13px;
+  background-image: url(../images/indicator.png);
+}
+#index .retweeted {
+  padding: 10px 0 0 0;
+}
+
+#index .source a {
+  color: #666;
+}
+#index .statuses .retweeted_status .username {
+  padding: 0 0 0 0;
 }
