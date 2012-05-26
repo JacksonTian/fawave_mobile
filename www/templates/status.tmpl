@@ -7,10 +7,10 @@
         <div class="status">
             <div class="title">
                 <div class="username"><%=status.user.screen_name%></div>
-                <!--<div class="time"><%=status.created_at%></div>-->
+                <div class="time"><%=V5.format(new Date(status.created_at))%></div>
             </div>
             <%=status.text%>
-            <div></div>
+            <div class="source">来自<%=status.source%></div>
         </div>
     </li>
 <%});%>

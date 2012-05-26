@@ -1,10 +1,14 @@
 <section id="index" class="card">
   <header>
     <a class="action write" href="javascript:;"></a>
-    <ul class="accounts">
-      <li><a href="javascript:;">新浪</a></li>
-      <li><a href="javascript:;">腾讯</a></li>
-    </ul>
+    <div class="pre"></div>
+    <div class="accounts">
+      <ul>
+        <li><a href="javascript:;">新浪</a></li>
+        <li><a href="javascript:;">腾讯</a></li>
+      </ul>
+    </div>
+    <div class="next"></div>
     <a class="action refresh" href="javascript:;"></a>
   </header>
   <article>

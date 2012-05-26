@@ -11,7 +11,6 @@
         color-stop(0.23, #d2d9e1),
         color-stop(0.53, #b3becd),
         color-stop(1, #899bb3));
-    padding: 0 5px;
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
@@ -20,22 +19,54 @@
     text-decoration: none;
 }
 #index header a.action{
-    display: -webkit-box;
+    position: absolute;
     width: 40px;
     height: 40px;
     background-size: 40px 40px;
+    top: 10px;
 }
 #index header a.write {
+    left: 5px;
     background-image: url(../images/write.png);
 }
 #index header a.refresh {
+    right: 5px;
     background-image: url(../images/refresh.png);
 }
+
+#index header .pre,
+#index header .next {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    background-size: 20px 20px;
+}
+#index header .pre {
+    left: 50px;
+    background-image: url(../images/pre.png);
+}
+#index header .next {
+    right: 50px;
+    background-image: url(../images/next.png);
+}
 #index header .accounts {
-    display: -webkit-box;
     -webkit-box-flex: 1;
-    -webkit-box-pack: start;
-    -webkit-box-align: center;
+    position: absolute;
+    left: 70px;
+    right: 70px;
+    height: 30px;
+    top: 15px;
+}
+#index header .accounts ul {
+  display: -webkit-box;
+  list-style: none;
+  float: left;
+  width: 600px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  text-align: left;
 }
 #index header .accounts li {
     width: 30px;
@@ -53,6 +84,12 @@
     top: 60px;
     width: 100%;
     bottom: 50px;
+}
+#index article .title {
+    display: -webkit-box;
+}
+#index article .username {
+    -webkit-box-flex: 1;
 }
 #index footer {
     height: 49px;
@@ -123,11 +160,11 @@
 }
 #index .statuses .status {
     -webkit-box-flex: 1;
-    font-size: 13px;
+    font-size: 14px;
     padding: 0 16px 0 0;
 }
 #index .statuses .username {
-    font-size: 12px;
+    font-size: 13px;
     padding: 0 0 8px 0;
     font-weight: bold;
 }

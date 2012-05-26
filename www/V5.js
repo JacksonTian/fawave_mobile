@@ -563,7 +563,7 @@
     };
 
     /**
-     * @desciption A wrapper method to localize template with the resources. 
+     * @desciption A wrapper method to localize template with the resources.
      * @param {string} template template string.
      * @param {object} resources resources object.
      * @returns rendered html string.
@@ -606,5 +606,10 @@
             return url;
         }
         return "proxy?url=" + url;
+    };
+    V5.format = function (day) {
+        console.log(typeof day);
+        console.log(day);
+        return day.getFullYear() + "/" + (day.getMonth() + 1) + "/" + day.getDate() + " " + day.getHours() + "/" + day.getMinutes() + "/" + day.getSeconds();
     };
 }(window));
