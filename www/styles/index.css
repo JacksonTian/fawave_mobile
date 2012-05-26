@@ -1,4 +1,136 @@
-#index {
-    background-color: #e5e5e5;
+#index header {
+    height: 60px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    border-top: 1px solid #e4e8ed;
+    border-bottom: 1px solid #777f90;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #d2d9e1),
+        color-stop(0.23, #d2d9e1),
+        color-stop(0.53, #b3becd),
+        color-stop(1, #899bb3));
+    padding: 0 5px;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
 }
-
+#index header a {
+    text-decoration: none;
+}
+#index header a.action{
+    display: -webkit-box;
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+}
+#index header a.write {
+    background-image: url(../images/write.png);
+}
+#index header a.refresh {
+    background-image: url(../images/refresh.png);
+}
+#index header .accounts {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: start;
+    -webkit-box-align: center;
+}
+#index header .accounts li {
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 5px;
+    background-image: url(../images/account.png);
+    background-size: 30px 30px;
+}
+#index header .accounts a {
+    color: #333333;
+}
+#index article {
+    position: absolute;
+    background-color: #f4f4f4;
+    top: 60px;
+    width: 100%;
+    bottom: 50px;
+}
+#index footer {
+    height: 49px;
+    border-top: 1px solid #1c1c1c;
+    -webkit-box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #575757),
+        color-stop(0.5, #141414),
+        color-stop(0.5, #000),
+        color-stop(1, #000));   
+}
+#index footer ul {
+    display: -webkit-box;
+}
+#index footer li {
+    -webkit-box-flex: 1;
+    width: 60px;
+}
+#index footer a {
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    height: 100%;
+    color: #999;
+    font-size: 12px;
+}
+#index footer .icon {
+    height: 30px;
+    width: 30px;
+    display: block;
+    background-position: center center;
+}
+#index footer .home .icon {
+    background-image: url(../images/bar_home.png);
+}
+#index footer .message .icon {
+    background-image: url(../images/bar_commentbox.png);
+}
+#index footer .profile .icon {
+    background-image: url(../images/bar_profile.png);
+} 
+#index footer .square .icon {
+    background-image: url(../images/bar_search.png);
+} 
+#index footer .more .icon {
+    background-image: url(../images/bar_msg_more.png);
+}
+#index .statuses li {
+    display: -webkit-box;
+    padding: 7px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+#index .statuses .avatar {
+    width: 55px;
+    padding: 0 0 0 8px;
+    -webkit-box-sizing: border-box;
+}
+#index .statuses .avatar img {
+    width: 35px;
+    height: 35px;
+    -webkit-mask-box-image: url(../images/avatar_image_mask.png) 75 stretch;
+}
+#index .statuses .status {
+    -webkit-box-flex: 1;
+    font-size: 13px;
+    padding: 0 16px 0 0;
+}
+#index .statuses .username {
+    font-size: 12px;
+    padding: 0 0 8px 0;
+    font-weight: bold;
+}
+#index .statuses .title {
+    display: -webkit-box;
+}

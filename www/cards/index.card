@@ -1,10 +1,28 @@
 <section id="index" class="card">
-<!-- Your HTML code here -->
-  <span>Hello V5 Framework.</span>
-  <div class="area">
-    Cross domain.
-
-  </div>
-  <div><a class="publish" href="javascript:;">发微博</a></div>
-  <div><a class="view" href="javascript:;">查看微博</a></div>
+  <header>
+    <a class="action write" href="javascript:;"></a>
+    <ul class="accounts">
+      <li><a href="javascript:;">新浪</a></li>
+      <li><a href="javascript:;">腾讯</a></li>
+    </ul>
+    <a class="action refresh" href="javascript:;"></a>
+  </header>
+  <article>
+    <div class="statuses">
+    </div>
+  </article>
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="javascript:;" class="home">
+            <span class="icon"></span><span class="txt">首页</span>
+            </a></li>
+        <li><a href="javascript:;" class="message">
+            <span class="icon"></span><span class="txt">消息</span></a></li>
+        <li><a href="javascript:;" class="profile"><span class="icon"></span><span class="txt">我的资料</span></a></li>
+        <li><a href="javascript:;" class="square"><span class="icon"></span><span class="txt">广场</span></a></li>
+        <li><a href="javascript:;" class="more"><span class="icon"></span><span class="txt">更多</span></a></li>
+      </ul>
+    </nav>
+  </footer>
 </section>
