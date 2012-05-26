@@ -3,5 +3,7 @@
   <span>Hello V5 Framework.</span>
   <div class="area">
     Cross domain.
+
   </div>
+  <div><a class="publish" href="javascript:;">发微博</a></div>
 </section>

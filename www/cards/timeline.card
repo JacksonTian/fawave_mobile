@@ -1,0 +1,25 @@
+<section id="timeline" class="card">
+    <header>
+        <a class="action write" href="javascript:;"></a>
+        <h2><a href="javascript:;">朴灵<span></span></a></h2>
+        <a class="action refresh" href="javascript:;"></a>
+    </header>
+    <article>
+        <div class="statuses">
+        </div>
+    </article>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="javascript:;" class="home">
+                    <span class="icon"></span><span class="txt">首页</span>
+                    </a></li>
+                <li><a href="javascript:;" class="message">
+                    <span class="icon"></span><span class="txt">消息</span></a></li>
+                <li><a href="javascript:;" class="profile"><span class="icon"></span><span class="txt">我的资料</span></a></li>
+                <li><a href="javascript:;" class="square"><span class="icon"></span><span class="txt">广场</span></a></li>
+                <li><a href="javascript:;" class="more"><span class="icon"></span><span class="txt">更多</span></a></li>
+            </ul>
+        </nav>
+    </footer>
+</section>

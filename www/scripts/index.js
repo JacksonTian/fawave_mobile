@@ -7,6 +7,9 @@ V5.registerCard("index", function () {
     $.get(V5.proxy("http://www.baidu.com/"), function (data) {
       view.$(".area").html(data);
     });
+    view.$(".publish").bind("click", function () {
+      card.openCard("publish");
+    });
   };
 
   return {

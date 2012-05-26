@@ -26,6 +26,9 @@ app.use("/proxy", function (req, res) {
       res.end();
     });
   });
+  proxyReq.on('err', function (err) {
+    console.log('problem with request: ' + err.message);
+  });
   proxyReq.end();
 });
 

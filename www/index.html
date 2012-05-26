@@ -20,12 +20,18 @@
       .script("lib/backbone-0.5.3.js").wait()
       .script("V5.js").wait()
       .script("scripts/index.js")
+      .script("scripts/publish.js")
+      .script("scripts/setting.js")
+      .script("scripts/timeline.js")
       .wait(function () {
         V5.init();
       });
     </script>
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="styles/publish.css" />
+    <link rel="stylesheet" href="styles/setting.css" />
+    <link rel="stylesheet" href="styles/timeline.css" />
   </head>
   <body>
     <div id="container">
@@ -36,4 +42,3 @@
     </div>
   </body>
 </html>
-
