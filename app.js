@@ -4,9 +4,7 @@ var url = require('url');
 var connect = require('connect');
 
 var app = connect();
-app.use(connect.static("www"));
 app.use(connect.query());
-app.use(connect.bodyParser());
 app.use("/proxy", function (req, res) {
   var target = url.parse(req.query.url);
   var options = {
@@ -20,17 +18,30 @@ app.use("/proxy", function (req, res) {
     res.writeHead(response.statusCode, response.headers);
     response.on('data', function (chunk) {
       res.write(chunk);
-      console.log(chunk);
     });
     response.on('end', function () {
       res.end();
     });
   });
-  proxyReq.on('err', function (err) {
-    console.log('problem with request: ' + err.message);
+
+  proxyReq.on('error', function (err) {
+    proxyReq.abort();
+    res.end(req.query.url + ' error: ' + err.message);
   });
-  proxyReq.end();
+
+  req.on('data', function (chunk) {
+    console.log('data', chunk.toString());
+    proxyReq.write(chunk);
+  });
+  req.on('end', function () {
+    console.log('end');
+    proxyReq.end();
+  });
+
 });
+
+app.use(connect.static(path.join(__dirname, "www")));
+
 
 app.listen(8001);
 console.log("Server is launching at port 8001.");
