@@ -78,6 +78,18 @@
 }
 #header .accounts a {
     color: #333333;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+#header .accounts .head {
+    width: 30px;
+    height: 30px;
+}
+#header .accounts .blogtype {
+    right: 5px;
+    bottom: 5px;
+    position: absolute;
 }
 #index article {
     position: absolute;
