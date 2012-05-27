@@ -30,15 +30,20 @@ V5.registerCard("setting", function () {
     });
 
     view.$('article li').bind('click', function (event) {
-      var $this = $(this);
-      var blogType = $this.data('type') || 'weibo';
-      var user = { blogType: blogType, oauth_callback: location.href };
+      var current = $(event.currentTarget);
+      var blogType = current.data('type') || 'weibo';
+      var user = { blogType: blogType, oauth_callback: 'http://localhost:8001/oauth_callback.html' };
       if (V5.Model.proxy) {
         user.proxy = V5.Model.proxy;
       }
       tapi.get_authorization_url(user, function (err, auth_info) {
+        if (err) {
+          alert(err.message);
+          return;
+        }
+        V5.Model[blogType + '_auth_info'] = auth_info; 
         console.log(auth_info);
-        location.href = auth_info.auth_url;
+        card.openCard("authorize/" + blogType);
       });
     });
   };

@@ -1,10 +1,13 @@
-V5.registerCard("setting", function () {
-  var initialize = function (url) {
+V5.registerCard("authorize", function () {
+  var initialize = function (blogType) {
     var card = this;
     var view = V5.View(card.node);
 
-
-    view.node.html('<iframe src="' + url + '"></iframe>');
+    var url = V5.Model[blogType + '_auth_info'];
+    view.el.html('<iframe src="' + url.auth_url + '"></iframe>');
+    window.addEventListener("message", function (event) {
+      console.log(event.data);
+    }, false);
 
     view.delegateEvents({
     });

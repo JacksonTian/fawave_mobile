@@ -19,9 +19,16 @@
 	<key>AllowInlineMediaPlayback</key>
 	<false/>
 	<key>OpenAllWhitelistURLsInWebView</key>
-	<false/>
+	<true/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>localhost</string>
+		<string>fawave.no.de</string>
+		<string>login.t.cn</string>
+		<string>login.sina.com.cn</string>
+		<string>kandian.com</string>
+		<string>tjs.sjs.sinajs.cn</string>
+		<string>www.baidu.com</string>
 		<string>t.cn</string>
 		<string>timg.sjs.sinajs.cn</string>
 		<string>api.t.sina.com.cn</string>
