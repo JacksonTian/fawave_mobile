@@ -1,3 +1,83 @@
 #setting {
   
 }
+#setting article {
+    background-image: url(../images/bg.png);
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    bottom: 45px;
+}
+
+#setting footer {
+    height: 45px;
+    padding: 2px 0px 1px 0;
+    border-top: 1px solid #4c4c4c;
+    -webkit-box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0, #e4e8ed),
+        color-stop(0.02, #e4e8ed),
+        color-stop(0.05, #b3becc),
+        color-stop(0.5, #899bb2),
+        color-stop(0.5, #7f94b0),
+        color-stop(1, #6f85a2));   
+}
+#setting footer ul {
+    display: -webkit-box;
+}
+#setting footer li {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -webkit-box-orient: vertical;
+    width: 60px;
+}
+#setting footer a {
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+    color: #fff;
+    font-size: 10px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-sizing: border-box;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+#setting footer a.active {
+    border: 1px solid #374e6f;
+    border-radius: 6px;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+    color-stop(0, #869ebc),
+    color-stop(0.5, #5978a3),
+    color-stop(0.5, #486a9a),
+    color-stop(1, #4a6c9b));  
+}
+#setting footer .icon {
+    height: 25px;
+    width: 30px;
+    display: block;
+    background-size: 30px 25px;
+    background-position: center center;
+}
+#setting footer .home .icon {
+    background-image: url(../images/bar_home.png);
+}
+#setting footer .message .icon {
+    background-image: url(../images/bar_message.png);
+}
+#setting footer .profile .icon {
+    background-image: url(../images/bar_profile.png);
+} 
+#setting footer .add .icon {
+    background-image: url(../images/bar_add.png);
+} 
+#setting footer .more .icon {
+    background-image: url(../images/bar_more.png);
+}
