@@ -22,7 +22,8 @@ V5.registerCard("setting", function () {
     view.delegateEvents({
       "click footer a": "go",
       "click footer a.add": "goSetting",
-      "click footer a.home": "goHome"
+      "click footer a.home": "goHome",
+      "click header a.home": "goHome"
     });
   };
 

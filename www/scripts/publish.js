@@ -18,17 +18,22 @@ V5.registerCard("publish", function () {
       }
     });
 
+    var statusBox = view.$('article textarea');
     view.bind("send", function (event) {
-      var text = view.$('article textarea').val();
+      var text = statusBox.val();
       var user = V5.Model.currentUser;
       tapi.update({ status: text, user: user }, function (err, status) {
         if (err) {
           return alert(err.message);
         }
-        view.$('article textarea').val('');
+        statusBox.val('');
         card.openCard("index");
       });
     });
+    // 立即焦点
+    setTimeout(function () {
+      statusBox[0].focus();
+    }, 25);
 
     view.bind("goHome", function (event) {
       card.openCard("index");
@@ -38,6 +43,15 @@ V5.registerCard("publish", function () {
       "click .back": "goHome",
       "click .send": "send"
     });
+  };
+
+  var reappear = function () {
+    var card = this;
+    var view = V5.view(card.node);
+    setTimeout(function () {
+      view.$('article textarea')[0].focus();
+    }, 25);
+
   };
 
   return {
