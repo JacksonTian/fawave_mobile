@@ -81,6 +81,7 @@ V5.registerCard("index", function () {
     V5.Model.currentUser = currentUser;
 
     proxy.assignAlways('user_head_template', 'users', function (template, users) {
+      V5.Model.users = users;
       view.$('.accounts ul').html(_.template(template, { users: users }));
     });
 
