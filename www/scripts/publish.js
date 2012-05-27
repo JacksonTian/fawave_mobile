@@ -19,8 +19,14 @@ V5.registerCard("publish", function () {
     });
 
     view.bind("send", function (event) {
-      $.ajax("url", function () {
-        
+      var text = view.$('article textarea').val();
+      var user = V5.Model.currentUser;
+      tapi.update({ status: text, user: user }, function (err, status) {
+        if (err) {
+          return alert(err.message);
+        }
+        view.$('article textarea').val('');
+        card.openCard("index");
       });
     });
 
@@ -29,8 +35,8 @@ V5.registerCard("publish", function () {
     });
 
     view.delegateEvents({
-        "click .back": "goHome",
-        "click .send": "send"
+      "click .back": "goHome",
+      "click .send": "send"
     });
   };
 
