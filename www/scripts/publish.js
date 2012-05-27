@@ -20,7 +20,7 @@ V5.registerCard("publish", function () {
 
     view.bind("send", function (event) {
       $.ajax("url", function () {
-        
+
       });
     });
 

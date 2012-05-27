@@ -1,4 +1,16 @@
 <section id="setting" class="card">
+  <header id="header">
+    <a class="action back" href="javascript:;">返回</a>
+    <div class="pre"></div>
+    <div class="accounts">
+      <ul>
+        <li><a href="javascript:;">新浪</a></li>
+        <li><a href="javascript:;">腾讯</a></li>
+      </ul>
+    </div>
+    <div class="next"></div>
+    <a class="action send" href="javascript:;">发微!</a>
+  </header>
   <article>
   </article>
   <footer>
