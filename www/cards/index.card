@@ -33,9 +33,12 @@
             </a></li>
         <li><a href="javascript:;" class="message">
             <span class="icon"></span><span class="txt">消息</span></a></li>
-        <li><a href="javascript:;" class="profile"><span class="icon"></span><span class="txt">我的资料</span></a></li>
-        <li><a href="javascript:;" class="square"><span class="icon"></span><span class="txt">广场</span></a></li>
-        <li><a href="javascript:;" class="more"><span class="icon"></span><span class="txt">更多</span></a></li>
+        <li><a href="javascript:;" class="add">
+            <span class="icon"></span><span class="txt">添加</span></a></li>
+        <li><a href="javascript:;" class="profile">
+            <span class="icon"></span><span class="txt">资料</span></a></li>
+        <li><a href="javascript:;" class="more">
+          <span class="icon"></span><span class="txt">更多</span></a></li>
       </ul>
     </nav>
   </footer>

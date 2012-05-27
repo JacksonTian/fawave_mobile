@@ -8,9 +8,10 @@
     border-bottom: 1px solid #777f90;
     background-image: -webkit-gradient(linear, left top, left bottom,
         color-stop(0, #d2d9e1),
-        color-stop(0.23, #d2d9e1),
-        color-stop(0.53, #b3becd),
-        color-stop(1, #899bb3));
+        color-stop(0.03, #b3becd),
+        color-stop(0.50, #899bb3),
+        color-stop(0.50, #7f94b0),
+        color-stop(1, #6e84a2));
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
@@ -37,10 +38,10 @@
 #index header .pre,
 #index header .next {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 20px;
-    background-size: 20px 20px;
+    width: 10px;
+    height: 10px;
+    top: 25px;
+    background-size: 10px 10px;
 }
 #index header .pre {
     left: 50px;
@@ -53,8 +54,8 @@
 #index header .accounts {
     -webkit-box-flex: 1;
     position: absolute;
-    left: 70px;
-    right: 70px;
+    left: 60px;
+    right: 60px;
     height: 30px;
     top: 15px;
 }
@@ -83,30 +84,37 @@
     background-color: #fff;
     top: 60px;
     width: 100%;
-    bottom: 50px;
+    bottom: 45px;
 }
 #index article .username {
     -webkit-box-flex: 1;
 }
 
 #index footer {
-    height: 49px;
-    border-top: 1px solid #1c1c1c;
+    height: 45px;
+    padding: 2px 0px 1px 0;
+    border-top: 1px solid #4c4c4c;
     -webkit-box-sizing: border-box;
     position: absolute;
     bottom: 0;
     width: 100%;
     background-image: -webkit-gradient(linear, left top, left bottom,
-        color-stop(0, #575757),
-        color-stop(0.5, #141414),
-        color-stop(0.5, #000),
-        color-stop(1, #000));   
+        color-stop(0, #e4e8ed),
+        color-stop(0.02, #e4e8ed),
+        color-stop(0.05, #b3becc),
+        color-stop(0.5, #899bb2),
+        color-stop(0.5, #7f94b0),
+        color-stop(1, #6f85a2));   
 }
 #index footer ul {
     display: -webkit-box;
 }
 #index footer li {
+    display: -webkit-box;
     -webkit-box-flex: 1;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -webkit-box-orient: vertical;
     width: 60px;
 }
 #index footer a {
@@ -115,30 +123,44 @@
     -webkit-box-align: center;
     -webkit-box-orient: vertical;
     text-decoration: none;
-    height: 100%;
-    color: #999;
-    font-size: 12px;
+    color: #fff;
+    font-size: 10px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-sizing: border-box;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+#index footer a.active {
+    border: 1px solid #374e6f;
+    border-radius: 6px;
+    background-image: -webkit-gradient(linear, left top, left bottom,
+    color-stop(0, #869ebc),
+    color-stop(0.5, #5978a3),
+    color-stop(0.5, #486a9a),
+    color-stop(1, #4a6c9b));  
 }
 #index footer .icon {
-    height: 30px;
+    height: 25px;
     width: 30px;
     display: block;
+    background-size: 30px 25px;
     background-position: center center;
 }
 #index footer .home .icon {
     background-image: url(../images/bar_home.png);
 }
 #index footer .message .icon {
-    background-image: url(../images/bar_commentbox.png);
+    background-image: url(../images/bar_message.png);
 }
 #index footer .profile .icon {
     background-image: url(../images/bar_profile.png);
 } 
-#index footer .square .icon {
-    background-image: url(../images/bar_search.png);
+#index footer .add .icon {
+    background-image: url(../images/bar_add.png);
 } 
 #index footer .more .icon {
-    background-image: url(../images/bar_msg_more.png);
+    background-image: url(../images/bar_more.png);
 }
 #index .statuses li {
     display: -webkit-box;
@@ -154,6 +176,7 @@
 #index .statuses .avatar img {
     width: 35px;
     height: 35px;
+    border-radius: 5px;
 }
 #index .statuses .status {
     -webkit-box-flex: 1;

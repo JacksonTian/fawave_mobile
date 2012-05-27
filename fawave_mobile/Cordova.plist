@@ -22,6 +22,8 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>t.cn</string>
+		<string>timg.sjs.sinajs.cn</string>
 		<string>api.t.sina.com.cn</string>
 		<string>*.sinaimg.cn</string>
 		<string>weibo.com</string>

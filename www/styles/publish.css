@@ -6,31 +6,34 @@
     text-align: center;
     line-height: 30px;
     background-image: url(../images/back.png);
+    background-size: 50px 30px;
+    width: 50px;
 }
 #publish header a.send {
     right: 5px;
     line-height: 30px;
     text-align: center;
     background-image: url(../images/send.png);
+    background-size: 60px 30px;
+    width: 60px;
 }
 #publish header a.action{
     position: absolute;
     height: 30px;
-    width: 60px;
+
     color: #fff;
-    background-size: 60px 30px;
     top: 15px;
 }
 #publish header .pre,
 #publish header .next {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 20px;
-    background-size: 20px 20px;
+    width: 10px;
+    height: 10px;
+    top: 25px;
+    background-size: 10px 10px;
 }
 #publish header .pre {
-    left: 65px;
+    left: 60px;
     background-image: url(../images/pre.png);
 }
 #publish header .next {
@@ -57,5 +60,37 @@
     width: 100%;
     -webkit-box-sizing: border-box;
     padding: 10px;
-    height: 40%;
+    height: 35%;
+    outline: none;
+}
+#publish article ul {
+    display: -webkit-box;
+    background-color: #8195af;
+}
+#publish article li {
+    height: 33px;
+    -webkit-box-flex: 1;
+    display: block;
+}
+#publish article a {
+    display: block;
+    height: 33px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 24px 18px;
+}
+#publish article a.position {
+    background-image: url(../images/position.png);
+}
+#publish article a.photo {
+    background-image: url(../images/photo.png);
+}
+#publish article a.topic {
+    background-image: url(../images/topic.png);
+}
+#publish article a.metion {
+    background-image: url(../images/metion.png);
+}
+#publish article a.toggle_keyboard {
+    background-image: url(../images/keyboard.png);
 }

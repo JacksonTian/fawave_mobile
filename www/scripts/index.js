@@ -151,21 +151,29 @@ V5.registerCard("index", function () {
     });
 
     view.bind("zoomin", function (event) {
-      var img = $(event.currentTarget);
-      if (img.data("state") === "thumbnail") {
-        img.attr("src", img.data("bmiddle"));
-        img.data("state", "bmiddle");
-      } else {
-        img.attr("src", img.data("thumbnail"));
-        img.data("state", "thumbnail");
-      }
-      view.iScroll.refresh();
+      // var img = $(event.currentTarget);
+      // if (img.data("state") === "thumbnail") {
+      //   img.attr("src", img.data("bmiddle"));
+      //   img.data("state", "bmiddle");
+      // } else {
+      //   img.attr("src", img.data("thumbnail"));
+      //   img.data("state", "thumbnail");
+      // }
+      // view.iScroll.refresh();
+    });
+
+    var footer = view.$("footer");
+    view.bind("go", function (event) {
+      var current = $(event.currentTarget);
+      footer.find(".active").removeClass("active");
+      current.addClass("active");
     });
 
     view.delegateEvents({
       "click .write": "goPublish",
       "click .refresh": "refresh",
-      "click .status img": "zoomin"
+      "click .status img": "zoomin",
+      "click footer a": "go"
     });
 
   };
