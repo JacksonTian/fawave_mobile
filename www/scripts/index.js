@@ -78,6 +78,7 @@ V5.registerCard("index", function () {
     if (!navigator.notification) {
       currentUser.proxy = location.origin + '/proxy';
     }
+    V5.Model.currentUser = currentUser;
 
     proxy.assignAlways('user_head_template', 'users', function (template, users) {
       view.$('.accounts ul').html(_.template(template, { users: users }));
@@ -200,7 +201,12 @@ V5.registerCard("index", function () {
 
   };
 
+  var reappear = function () {
+    // TODO: 刷新
+  };
+
   return {
-    initialize: initialize
+    initialize: initialize,
+    reappear: reappear
   };
 });
