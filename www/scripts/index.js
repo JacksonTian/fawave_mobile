@@ -79,6 +79,15 @@ V5.registerCard("index", function () {
       currentUser.proxy = location.origin + '/proxy';
     }
 
+    proxy.assignAlways('user_head_template', 'users', function (template, users) {
+      view.$('.accounts ul').html(_.template(template, { users: users }));
+    });
+
+    tapi.verify_credentials(currentUser, function (err, user) {
+      user.blogType = currentUser.blogType;
+      proxy.fire('users', [ user ]);
+    });
+
     proxy.assignAlways("template", "data", function (template, data) {
       var api = tapi.api_dispatch(currentUser);
       data.api = api;
@@ -135,6 +144,10 @@ V5.registerCard("index", function () {
         proxy.fire('counts', counts);
       });
     };
+
+    V5.getTemplate("user_head", function (template) {
+      proxy.fire("user_head_template", template);
+    });
 
     V5.getTemplate("status", function (template) {
       proxy.fire("template", template);
