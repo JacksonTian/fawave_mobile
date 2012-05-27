@@ -18,8 +18,10 @@ V5.registerCard("publish", function () {
       }
     });
 
-    view.bind("send", function () {
-
+    view.bind("send", function (event) {
+      $.ajax("url", function () {
+        
+      });
     });
 
     view.bind("goHome", function (event) {

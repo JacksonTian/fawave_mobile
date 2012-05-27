@@ -61,6 +61,7 @@
     -webkit-box-sizing: border-box;
     padding: 10px;
     height: 35%;
+    font-size: 16px;
     outline: none;
 }
 #publish article ul {

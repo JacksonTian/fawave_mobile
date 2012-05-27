@@ -88,6 +88,13 @@
 }
 #index article .username {
     -webkit-box-flex: 1;
+    color: #008000;
+}
+#index .text {
+    font-size: 14px;
+}
+#index .text a {
+    color: #f7700c;
 }
 
 #index footer {
@@ -180,7 +187,6 @@
 }
 #index .statuses .status {
     -webkit-box-flex: 1;
-    font-size: 14px;
     padding: 0 16px 0 0;
 }
 #index .statuses .username {
@@ -274,15 +280,15 @@
 #index .statuses .retweeted_status .status {
   padding: 0 0 0 5px;
 }
-#index .status img {
+#index .status .photo {
   border: 1px solid #d8d8d8;
   padding: 2px;
   background-color: #fff;
 }
-#index .status img[data-state="thumbnail"] {
+#index .status .photo[data-state="thumbnail"] {
   cursor: -webkit-zoom-in;
 }
-#index .status img[data-state="bmiddle"] {
+#index .status .photo[data-state="bmiddle"] {
   cursor: -webkit-zoom-out;
 }
 #index .status i {

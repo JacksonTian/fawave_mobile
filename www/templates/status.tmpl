@@ -8,9 +8,9 @@
         <div class="username"><%= status.user.screen_name %></div>
         <div class="time"><%= new Date(status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
       </div>
-      <div><%= api.process_text(status.text) %></div>
+      <div class="text"><%= api.process_text(status.text) %></div>
       <% if (status.thumbnail_pic) { %>
-      <img data-state="thumbnail"  src="<%= status.thumbnail_pic %>" data-bmiddle="<%= status.bmiddle_pic %>"
+      <img class="photo" data-state="thumbnail"  src="<%= status.thumbnail_pic %>" data-bmiddle="<%= status.bmiddle_pic %>"
         data-thumbnail="<%= status.thumbnail_pic %>"
         data-original="<%= status.original_pic %>" />
       <% } %>
@@ -33,9 +33,9 @@
               <div class="username"><%= retweeted_status.user.screen_name %></div>
               <div class="time"><%= new Date(retweeted_status.created_at).format('yyyy-MM-dd hh:mm:ss') %></div>
             </div>
-            <div><%= api.process_text(retweeted_status.text) %></div>
+            <div class="text"><%= api.process_text(retweeted_status.text) %></div>
             <% if (retweeted_status.thumbnail_pic) { %>
-            <img data-state="thumbnail" src="<%= retweeted_status.thumbnail_pic %>" data-thumbnail="<%= retweeted_status.thumbnail_pic %>" data-bmiddle="<%= retweeted_status.bmiddle_pic %>" 
+            <img class="photo" data-state="thumbnail" src="<%= retweeted_status.thumbnail_pic %>" data-thumbnail="<%= retweeted_status.thumbnail_pic %>" data-bmiddle="<%= retweeted_status.bmiddle_pic %>" 
               data-original="<%= retweeted_status.original_pic %>" />
             <% } %>
             <div class="info">
