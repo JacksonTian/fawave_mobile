@@ -1,0 +1,4 @@
+<% _.each(users, function (user, index) { %>
+<li data-id="<%= user.id %>"><a href="javascript:;"><img class="head" src="<%= user.profile_image_url %>" /><img class="blogtype"  src="images/blogs/<%= user.blogType %>_16.png" /></a>
+</li>
+<% }); %>
