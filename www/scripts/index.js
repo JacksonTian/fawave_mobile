@@ -76,11 +76,12 @@ V5.registerCard("index", function () {
       oauth_token_secret: '798722589f339cc4e9e0a66a9b53f693' 
     };
     if (!navigator.notification) {
-      currentUser.proxy = location.origin + '/proxy';
+      V5.Model.proxy = currentUser.proxy = location.origin + '/proxy';
     }
     V5.Model.currentUser = currentUser;
 
     proxy.assignAlways('user_head_template', 'users', function (template, users) {
+      V5.Model.users = users;
       view.$('.accounts ul').html(_.template(template, { users: users }));
     });
 

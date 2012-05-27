@@ -18,7 +18,17 @@ V5.registerCard("publish", function () {
       }
     });
 
+    var proxy = new EventProxy();
+    proxy.assignAlways('user_head_template', function (template) {
+      view.$('.accounts ul').html(_.template(template, { users: V5.Model.users }));
+    });
+
+    V5.getTemplate("user_head", function (template) {
+      proxy.fire("user_head_template", template);
+    });
+
     var statusBox = view.$('article textarea');
+
     view.bind("send", function (event) {
       var text = statusBox.val();
       var user = V5.Model.currentUser;
