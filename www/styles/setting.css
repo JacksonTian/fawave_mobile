@@ -1,12 +1,40 @@
 #setting {
   
 }
+#setting header a.action{
+    position: absolute;
+    height: 30px;
+    color: #fff;
+    top: 15px;
+}
+#setting header a.back {
+    left: 5px;
+    text-align: center;
+    line-height: 30px;
+    background-image: url(../images/back.png);
+    background-size: 50px 30px;
+    padding: 0 0 0 8px;
+    -webkit-box-sizing: border-box;
+    width: 50px;
+}
+#setting header a.home {
+    right: 5px;
+    text-align: center;
+    line-height: 30px;
+    background-image: url(../images/send.png);
+    background-size: 60px 30px;
+    width: 60px;
+}
+#setting header h2 {
+    color: #fff;
+}
 #setting article {
     background-image: url(../images/bg.png);
     position: absolute;
     top: 60px;
     width: 100%;
     bottom: 45px;
+    padding: 8px 0 0 0;
 }
 
 #setting footer {
@@ -80,4 +108,41 @@
 } 
 #setting footer .more .icon {
     background-image: url(../images/bar_more.png);
+}
+#setting article article {
+  padding: 8px 0 0 0;
+}
+#setting article ul {
+    margin: 0 10px;
+}
+#setting article li {
+    height: 44px;
+    background-color: #fff;
+    padding: 0 10px 0 18px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    display: -webkit-box;
+    line-height: 44px;
+}
+#setting article li:first-child {
+    -webkit-border-top-left-radius: 9px;
+    -webkit-border-top-right-radius: 9px;
+}
+#setting article li:last-child {
+    border-bottom: 1px solid #ccc;
+    -webkit-border-bottom-left-radius: 9px;
+    -webkit-border-bottom-right-radius: 9px;
+}
+#setting article li .name {
+    -webkit-box-flex: 1;
+    font-size: 17px;
+    font-weight: bold;
+}
+#setting article li .action {
+    width: 10px;
+    background-size: 10px 14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../images/expand.png);
 }

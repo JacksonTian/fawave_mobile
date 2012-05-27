@@ -29,6 +29,7 @@ var TSinaAPI = {
     search_url: 'http://weibo.com/k/',
     result_format: '.json',
     source: '',
+    need_source: true,
     oauth_key: '',
     oauth_secret: '',
     oauth_callback: '',
@@ -80,6 +81,7 @@ var TSinaAPI = {
     update:               '/statuses/update',
     upload:               '/statuses/upload',
     repost:               '/statuses/repost',
+    // repost:               '/statuses/retweet/{{id}}',
     repost_timeline:      '/statuses/repost_timeline',
     comment:              '/statuses/comment',
     reply:                '/statuses/reply',
@@ -162,6 +164,7 @@ var TSinaAPI = {
     for (var k in params) {
       args[k] = params[k];
     }
+    args.type = (args.type || 'GET').toUpperCase();
     args.data = args.data || {};
     if (!args.data.source) {
       if (args.need_source === false || this.config.need_source === false) {
@@ -196,6 +199,7 @@ var TSinaAPI = {
     args.url.replace(utils.STRING_FORMAT_REGEX, function (match, key) {
       delete args.data[key];
     });
+    // console.log(url, args, user)
     // 设置认证头部
     this.apply_auth(url, args, user);
     var callmethod = user.uniqueKey + ': ' + args.type + ' ' + args.url;
@@ -245,13 +249,13 @@ var TSinaAPI = {
       }
       var parameters = {};
 
-      for (var k in args.data) {   
+      for (var k in args.data) {
         parameters[k] = args.data[k];
         if (k.substring(0, 6) === 'oauth_') { // 删除oauth_verifier相关参数
           delete args.data[k];
         }
       } 
-      
+
       var message = {
         action: url,
         method: args.type, 
@@ -267,9 +271,8 @@ var TSinaAPI = {
       // 设置时间戳
       OAuth.setTimestampAndNonce(message);
       // 签名参数
-      //console.log(message.parameters);
+      // console.log(message.parameters);
       OAuth.SignatureMethod.sign(message, accessor);
-      
       // oauth参数通过get方式传递
       if (this.config.oauth_params_by_get) {
         args.data = message.parameters;
@@ -287,26 +290,19 @@ var TSinaAPI = {
   },
   
   // 获取认证url
-  get_authorization_url: function (user, oauth_callback_url, callback, context) {
-    if (typeof oauth_callback_url === 'function') {
-      context = callback;
-      callback = oauth_callback_url;
-      oauth_callback_url = null;
-    } else {
-      user.oauth_callback_url = oauth_callback_url;
-    }
-    var auth_url = null;
-    this.get_request_token(user, function (error, token, response) {
+  get_authorization_url: function (user, callback, context) {
+    var auth_info = null;
+    this.get_request_token(user, function (error, token) {
       if (token) {
         // 返回登录url给用户登录
         var params = { oauth_token: token.oauth_token };
-        params.oauth_callback = user.oauth_callback_url || this.config.oauth_callback || 
-          this.config.default_oauth_callback;
-        auth_url = this.format_authorization_url(params);
-        user.oauth_token_key = token.oauth_token;
-        user.oauth_token_secret = token.oauth_token_secret;
+        params.oauth_callback = user.oauth_callback || this.config.oauth_callback || this.config.default_oauth_callback;
+        auth_info = {};
+        auth_info.auth_url = this.format_authorization_url(params);
+        auth_info.oauth_token_key = token.oauth_token;
+        auth_info.oauth_token_secret = token.oauth_token_secret;
       }
-      callback.call(context, error, auth_url, response);
+      callback.call(context, error, auth_info);
     }, this);
   },
 
@@ -316,7 +312,7 @@ var TSinaAPI = {
     }
     var params = {
       url: this.config.oauth_request_token,
-      type: 'get',
+      type: 'GET',
       user: user,
       play_load: 'string',
       api_host: this.config.oauth_host,
@@ -324,21 +320,29 @@ var TSinaAPI = {
       need_source: false
     };
     // 若没有设置oauth_callback参数，则使用默认的参数
-    params.data.oauth_callback = user.oauth_callback_url || this.config.oauth_callback || 
+    params.data.oauth_callback = user.oauth_callback || this.config.oauth_callback || 
       this.config.default_oauth_callback;
     if (this.config.oauth_request_params) {
       utils.extend(params.data, this.config.oauth_request_params);
     }
-    this._send_request(params, function (error, token_str, response) {
+    this._send_request(params, function (err, token_str, response) {
       var token = null;
       if (token_str) {
         token = utils.querystring.parse(token_str);
         if (!token.oauth_token) {
           token = null;
-          error = { message: error || token_str };
+          if (!err) {
+            err = new Error('Get request token error, ' + token_str);
+            err.name = 'GetRequestTokenError';
+          }
+        }
+      } else {
+        if (!err) {
+          err = new Error('Get request token error, empty token string');
+          err.name = 'GetRequestTokenError';
         }
       }
-      callback.call(context, error, token, response);
+      callback.call(context, err, token, response);
     });
   },
     
@@ -349,41 +353,47 @@ var TSinaAPI = {
     }
     var params = {
       url: this.config.oauth_access_token,
-      type: 'get',
+      type: 'GET',
       user: user,
       play_load: 'string',
       api_host: this.config.oauth_host,
       data: {},
       need_source: false
     };
-    if (user.oauth_pin || user.oauth_verifier) {
-      params.data.oauth_verifier = user.oauth_pin || user.oauth_verifier;
+    var oauth_verifier = user.oauth_pin || user.oauth_verifier;
+    if (oauth_verifier) {
+      params.data.oauth_verifier = oauth_verifier;
+      delete user.oauth_pin;
+      delete user.oauth_verifier;
     }
     if (user.authtype === 'xauth') {
       params.data.x_auth_username = user.username;
       params.data.x_auth_password = user.password;
       params.data.x_auth_mode = "client_auth";
     }
-    this._send_request(params, function (error, token_str, response) {
+    this._send_request(params, function (err, token_str) {
       var token = null;
+      var message;
       if (token_str) {
         token = utils.querystring.parse(token_str);
         if(!token.oauth_token) {
           token = null;
-          error = {message: 'error token str: ' + token_str};
+          message = token.error_CN || token.error || token_str;
+          err = new Error('Get access token error: ' + message);
         } else {
           user.oauth_token_key = token.oauth_token;
           user.oauth_token_secret = token.oauth_token_secret;
         }
-      } else if (error) {
-        error = utils.querystring.parse(error.message || error);
-        var message = error.message;
-        if (!message) {
-          message = error.error_CN || error.error;
-        }
-        error = new Error(message);
+      } else if (typeof err === 'string') {
+        var error = utils.querystring.parse(err.message || err);
+        message = error.message || error.error_CN || error.error || err;
+        err = new Error(message);
       }
-      callback.call(context, error, user, response);
+      if (err) {
+        err.name = 'GetAccessTokenError';
+        user = null;
+      }
+      callback.call(context, err, user);
     });
   },
     
@@ -395,7 +405,7 @@ var TSinaAPI = {
   verify_credentials: function (user, callback, context) {
     var params = {
       url: this.config.verify_credentials,
-      type: 'get',
+      type: 'GET',
       user: user,
       play_load: 'user'
     };
@@ -403,12 +413,9 @@ var TSinaAPI = {
   },
         
   rate_limit_status: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.rate_limit_status,
-      type: 'get',
+      type: 'GET',
       play_load: 'rate',
       data: data
     };
@@ -419,7 +426,7 @@ var TSinaAPI = {
   friends_timeline: function (data, callback, context) {
     var params = {
       url: this.config.friends_timeline,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -430,7 +437,7 @@ var TSinaAPI = {
   user_timeline: function (data, callback, context) {
     var params = {
       url: this.config.user_timeline,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -441,7 +448,7 @@ var TSinaAPI = {
   comments_timeline: function (data, callback, context) {
     var params = {
       url: this.config.comments_timeline,
-      type: 'get',
+      type: 'GET',
       play_load: 'comment',
       data: data
     };
@@ -452,7 +459,7 @@ var TSinaAPI = {
   repost_timeline: function (data, callback, context) {
     var params = {
       url: this.config.repost_timeline,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -463,7 +470,7 @@ var TSinaAPI = {
   mentions: function (data, callback, context){
     var params = {
       url: this.config.mentions,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -474,7 +481,7 @@ var TSinaAPI = {
   followers: function (data, callback, context) {
     var params = {
       url: this.config.followers,
-      type: 'get',
+      type: 'GET',
       play_load: 'user',
       data: data
     };
@@ -484,7 +491,7 @@ var TSinaAPI = {
   public_timeline: function (data, callback, context) {
     var params = {
       url: this.config.public_timeline,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -495,7 +502,7 @@ var TSinaAPI = {
   friends: function (data, callback, context) {
     var params = {
       url: this.config.friends,
-      type: 'get',
+      type: 'GET',
       play_load: 'user',
       data: data
     };
@@ -506,7 +513,7 @@ var TSinaAPI = {
   favorites: function (data, callback, context) {
     var params = {
       url: this.config.favorites,
-      type: 'get',
+      type: 'GET',
       play_load: 'status',
       data: data
     };
@@ -515,12 +522,9 @@ var TSinaAPI = {
 
   // id
   favorites_create: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.favorites_create,
-      type: 'post',
+      type: 'POST',
       play_load: 'status',
       data: data
     };
@@ -529,12 +533,9 @@ var TSinaAPI = {
 
   // id
   favorites_destroy: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.favorites_destroy,
-      type: 'post',
+      type: 'POST',
       play_load: 'status',
       data: data
     };
@@ -543,12 +544,9 @@ var TSinaAPI = {
 
   // ids
   counts: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.counts,
-      type: 'get',
+      type: 'GET',
       play_load: 'count',
       data: data
     };
@@ -559,7 +557,7 @@ var TSinaAPI = {
   user_show: function (data, callback, context) {
     var params = {
       url: this.config.user_show,
-      type: 'get',
+      type: 'GET',
       play_load: 'user',
       data: data
     };
@@ -568,12 +566,9 @@ var TSinaAPI = {
 
     // since_id, max_id, count, page 
   direct_messages: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.direct_messages,
-      type: 'get',
+      type: 'GET',
       play_load: 'message',
       data: data
     };
@@ -582,12 +577,9 @@ var TSinaAPI = {
 
   // id
   destroy_msg: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.destroy_msg,
-      type: 'post',
+      type: 'POST',
       play_load: 'message',
       data: data
     };
@@ -601,12 +593,9 @@ var TSinaAPI = {
   source 可选，显示在网站上的来自哪里对应的标识符。如果想显示指定的字符，请与官方人员联系。
   */
   new_message: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.new_message,
-      type: 'post',
+      type: 'POST',
       play_load: 'message',
       data: data
     };
@@ -617,17 +606,6 @@ var TSinaAPI = {
   status_show: function (data, callback, context) {
     var params = {
       url: this.config.status_show,
-      play_load: 'status',
-      data: data
-    };
-    this._send_request(params, callback, context);
-  },
-    
-  update: function (data, callback, context) {
-    //console.log(this.config.update);
-    var params = {
-      url: this.config.update,
-      type: 'POST',
       play_load: 'status',
       data: data
     };
@@ -685,7 +663,8 @@ var TSinaAPI = {
     builder += boundary;
     builder += crlf;
 
-    for (var key in data) {
+    var key;
+    for (key in data) {
       var value = this.url_encode(data[key]);
       auth_args.data[key] = value;
     }
@@ -702,7 +681,7 @@ var TSinaAPI = {
     // 设置认证头部
     this.apply_auth(url, auth_args, user); 
     
-    for (var key in auth_args.data) {
+    for (key in auth_args.data) {
       /* Generate headers. key */            
       builder += 'Content-Disposition: form-data; name="' + key + '"';
       builder += crlf;
@@ -776,10 +755,20 @@ var TSinaAPI = {
     }
   },
 
+  update: function (data, callback, context) {
+    var params = {
+      url: this.config.update,
+      type: 'POST',
+      play_load: 'status',
+      data: data
+    };
+    this._send_request(params, callback, context);
+  },
+
   repost: function (data, callback, context) {
     var params = {
       url: this.config.repost,
-      type: 'post',
+      type: 'POST',
       play_load: 'status',
       data: data
     };
@@ -789,7 +778,7 @@ var TSinaAPI = {
   comment: function (data, callback, context) {
     var params = {
       url: this.config.comment,
-      type: 'post',
+      type: 'POST',
       play_load: 'comment',
       data: data
     };
@@ -799,7 +788,7 @@ var TSinaAPI = {
   reply: function (data, callback, context) {
     var params = {
       url: this.config.reply,
-      type: 'post',
+      type: 'POST',
       play_load: 'comment',
       data: data
     };
@@ -809,7 +798,7 @@ var TSinaAPI = {
   comments: function (data, callback, context) {
     var params = {
       url: this.config.comments,
-      type: 'get',
+      type: 'GET',
       play_load: 'comment',
       data: data
     };
@@ -820,7 +809,7 @@ var TSinaAPI = {
   comment_destroy: function (data, callback, context) {
     var params = {
       url: this.config.comment_destroy,
-      type: 'post',
+      type: 'POST',
       play_load: 'comment',
       data: data
     };
@@ -830,7 +819,7 @@ var TSinaAPI = {
   friendships_create: function (data, callback, context) {
     var params = {
       url: this.config.friendships_create,
-      type: 'post',
+      type: 'POST',
       play_load: 'user',
       data: data
     };
@@ -839,12 +828,9 @@ var TSinaAPI = {
 
   // id
   friendships_destroy: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.friendships_destroy,
-      type: 'post',
+      type: 'POST',
       play_load: 'user',
       data: data
     };
@@ -852,12 +838,8 @@ var TSinaAPI = {
   },
 
   friendships_show: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.friendships_show,
-      type: 'get',
       play_load: 'user',
       data: data
     };
@@ -866,12 +848,9 @@ var TSinaAPI = {
 
   // type
   reset_count: function (data, callback, context) {
-    if (!callback) {
-      return;
-    }
     var params = {
       url: this.config.reset_count,
-      type: 'post',
+      type: 'POST',
       play_load: 'result',
       data: data
     };
@@ -902,7 +881,7 @@ var TSinaAPI = {
   create_tag: function (data, callback, context) {
     var params = {
       url: this.config.create_tag,
-      type: 'post',
+      type: 'POST',
       play_load: 'tag',
       data: data
     };
@@ -913,7 +892,7 @@ var TSinaAPI = {
   destroy_tag: function (data, callback, context) {
     var params = {
       url: this.config.destroy_tag,
-      type: 'post',
+      type: 'POST',
       play_load: 'tag',
       data: data
     };
@@ -922,7 +901,7 @@ var TSinaAPI = {
 
   // id
   destroy: function (data, callback, context) {
-    if (!data || !data.id || !callback) {
+    if (!data || !data.id) {
       return;
     }
     var params = {
@@ -931,7 +910,7 @@ var TSinaAPI = {
       play_load: 'status',
       data: data
     };
-    this._send_request(params, callbac, context);
+    this._send_request(params, callback, context);
   },
   
   // q, max_id, count
@@ -1072,7 +1051,7 @@ var TSinaAPI = {
   },
 
   format_status: function (status, args) {
-    if (!status.user) { // search data
+    if (!status.user && status.from_user) { // search data
       status.user = {
         screen_name: status.from_user,
         profile_image_url: status.profile_image_url,
@@ -1082,17 +1061,27 @@ var TSinaAPI = {
       delete status.from_user;
       delete status.from_user_id;
     }
-    this.format_user(status.user, args);
+    if (status.user) {
+      status.user = this.format_user(status.user, args);
+    }
     
     if (status.retweeted_status) {
       status.retweeted_status = this.format_status(status.retweeted_status, args);
     }
-    status.t_url = 'http://weibo.com/' + status.user.id + '/' + WeiboUtil.mid2url(status.mid); 
+    if (status.user) {
+      status.t_url = 'http://weibo.com/' + status.user.id + '/' + WeiboUtil.mid2url(status.mid);
+    }
     return status;
   },
 
   format_user: function (user, args) {
     user.t_url = 'http://weibo.com/' + (user.domain || user.id);
+    if (user.status) {
+      user.status = this.format_status(user.status, args);
+      if (!user.status.t_url) {
+        user.status.t_url = 'http://weibo.com/' + user.id + '/' + WeiboUtil.mid2url(user.status.mid || ser.status.id);
+      }
+    }
     return user;
   },
 
