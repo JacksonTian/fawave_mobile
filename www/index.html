@@ -32,15 +32,12 @@
       .script("scripts/setting.js")
       .script("scripts/timeline.js")
       .wait(function () {
-        
         // load all the lib scripts with urlprefix where the `weibo` directory you put into 
         window.tapi = weibo.TAPI;
         var appkey = '4010445928', secret = 'd119f62bfb70a4ba8d9b68bf14d6e45a';
         var oauth_callback_url = 'oob';
         tapi.init('tsina', appkey, secret, oauth_callback_url);
-
         V5.init();
-        
       });
     </script>
     <link rel="stylesheet" href="css/base.css" />

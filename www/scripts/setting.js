@@ -19,6 +19,10 @@ V5.registerCard("setting", function () {
       card.openCard("index");
     });
 
+    view.bind("authorize", function (event) {
+      card.openCard("authorize");
+    });
+
     view.delegateEvents({
       "click footer a": "go",
       "click footer a.add": "goSetting",
