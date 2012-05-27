@@ -69,29 +69,37 @@ V5.registerCard("index", function () {
       }
     });
 
-    var currentUser = {
-      blogType: 'tsina',
-      authtype: 'oauth',
-      oauth_token_key: 'd1ef5fa9aa9fee08fdc6267193a59d6a',
-      oauth_token_secret: '798722589f339cc4e9e0a66a9b53f693' 
-    };
     if (!navigator.notification) {
-      V5.Model.proxy = currentUser.proxy = location.origin + '/proxy';
+      V5.Model.proxy = location.origin + '/proxy';
     }
-    V5.Model.currentUser = currentUser;
+    if (!V5.Model.currentUser) {
+      return card.openCard('setting');
+    }
 
-    proxy.assignAlways('user_head_template', 'users', function (template, users) {
-      V5.Model.users = users;
-      view.$('.accounts ul').html(_.template(template, { users: users }));
+    // var currentUser = {
+    //   blogType: 'tsina',
+    //   authtype: 'oauth',
+    //   oauth_token_key: 'd1ef5fa9aa9fee08fdc6267193a59d6a',
+    //   oauth_token_secret: '798722589f339cc4e9e0a66a9b53f693' 
+    // };
+    
+    // V5.Model.currentUser = currentUser;
+
+    proxy.assignAlways('user_head_template', function (template) {
+      view.$('.accounts ul').html(_.template(template, { users: V5.Model.users }));
     });
 
-    tapi.verify_credentials(currentUser, function (err, user) {
-      user.blogType = currentUser.blogType;
-      proxy.fire('users', [ user ]);
-    });
+    // tapi.verify_credentials(currentUser, function (err, user) {
+    //   if (err) {
+    //     console.log(err);
+    //     return alert(err.message);
+    //   }
+    //   user.blogType = currentUser.blogType;
+    //   proxy.fire('users', [ user ]);
+    // });
 
     proxy.assignAlways("template", "data", function (template, data) {
-      var api = tapi.api_dispatch(currentUser);
+      var api = tapi.api_dispatch(V5.Model.currentUser);
       data.api = api;
       if (data.append) {
         view.$(".statuses ul").append(_.template(template, data));
@@ -112,7 +120,7 @@ V5.registerCard("index", function () {
     });
 
     var getTimeline = function () {
-      tapi.friends_timeline({ user: currentUser }, function (err, statuses) {
+      tapi.friends_timeline({ user: V5.Model.currentUser }, function (err, statuses) {
         proxy.fire("data", { statuses: statuses });
         showCounts(statuses);
       });
@@ -121,7 +129,7 @@ V5.registerCard("index", function () {
     var nextPage = function () {
       var max_id = view.$('.statuses li:last-child').data('id');
       tapi.friends_timeline({
-        user: currentUser,
+        user: V5.Model.currentUser,
         max_id: max_id
       }, function (err, statuses) {
         proxy.fire('data',  { statuses: statuses, append: true });
@@ -142,7 +150,7 @@ V5.registerCard("index", function () {
         }
       }
       ids = Object.keys(ids);
-      tapi.counts({ user: currentUser, ids: ids.join(',') }, function (err, counts) {
+      tapi.counts({ user: V5.Model.currentUser, ids: ids.join(',') }, function (err, counts) {
         proxy.fire('counts', counts);
       });
     };

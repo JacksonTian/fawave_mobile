@@ -32,7 +32,7 @@ V5.registerCard("setting", function () {
     view.$('article li').bind('click', function (event) {
       var current = $(event.currentTarget);
       var blogType = current.data('type') || 'weibo';
-      var user = { blogType: blogType, oauth_callback: 'http://localhost:8001/oauth_callback.html' };
+      var user = { blogType: blogType, oauth_callback: 'http://club.fawave.net4team.net/oauth_callback.html' };
       if (V5.Model.proxy) {
         user.proxy = V5.Model.proxy;
       }
@@ -41,9 +41,9 @@ V5.registerCard("setting", function () {
           alert(err.message);
           return;
         }
-        V5.Model[blogType + '_auth_info'] = auth_info; 
-        console.log(auth_info);
-        card.openCard("authorize/" + blogType);
+        weibo.utils.extend(user, auth_info);
+        V5.Model.auth_info = user; 
+        card.openCard("authorize/" + blogType + '?r=' + new Date().getTime());
       });
     });
   };
