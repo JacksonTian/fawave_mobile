@@ -1,4 +1,21 @@
 <section id="setting" class="card">
-  <div><textarea></textarea></div>
-  <button>发微！</button>
+  <article>
+  </article>
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="javascript:;" class="home">
+            <span class="icon"></span><span class="txt">首页</span>
+            </a></li>
+        <li><a href="javascript:;" class="message">
+            <span class="icon"></span><span class="txt">消息</span></a></li>
+        <li><a href="javascript:;" class="add">
+            <span class="icon"></span><span class="txt">添加</span></a></li>
+        <li><a href="javascript:;" class="profile">
+            <span class="icon"></span><span class="txt">资料</span></a></li>
+        <li><a href="javascript:;" class="more">
+          <span class="icon"></span><span class="txt">更多</span></a></li>
+      </ul>
+    </nav>
+  </footer>
 </section>

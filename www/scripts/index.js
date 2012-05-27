@@ -169,11 +169,20 @@ V5.registerCard("index", function () {
       current.addClass("active");
     });
 
+    view.bind("goSetting", function (event) {
+      card.openCard("setting");
+    });
+
+    view.bind("goHome", function (event) {
+      card.openCard("index");
+    });
+
     view.delegateEvents({
       "click .write": "goPublish",
       "click .refresh": "refresh",
       "click .status img": "zoomin",
-      "click footer a": "go"
+      "click footer a": "go",
+      "click footer a.add": "goSetting"
     });
 
   };
